@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>צ'ק-אין שבועי | דור עמר</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1A5C3A;--gm:#2E8B57;--gl:#EBF5EE;--gp:#F4FBF6;--am:#D4820A;--al:#FEF3E2;--rd:#C0392B;--rl:#FDECEA;--bg:#F7F8F5;--wh:#fff;--tx:#1A1A18;--tm:#555550;--ts:#888880;--br:#E2E8DF;--r:16px;--rs:10px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;padding-bottom:60px}
+.header{background:var(--g);padding:28px 20px 22px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hlbl{font-size:11px;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:6px}
+.htitle{font-size:26px;font-weight:900;color:#fff;line-height:1.1}
+.hsub{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px;font-weight:300}
+.pw{background:var(--wh);padding:12px 20px;border-bottom:1px solid var(--br);position:sticky;top:0;z-index:10}
+.pb{height:4px;background:var(--br);border-radius:2px;overflow:hidden}
+.pf{height:100%;background:var(--g);border-radius:2px;transition:width .4s ease;width:0%}
+.pt{font-size:11px;color:var(--ts);text-align:center;margin-top:5px}
+.cnt{padding:0 16px;max-width:480px;margin:0 auto}
+.sec{margin-top:18px;opacity:0;transform:translateY(14px);animation:fu .45s ease forwards}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.sec:nth-child(1){animation-delay:.04s}.sec:nth-child(2){animation-delay:.08s}.sec:nth-child(3){animation-delay:.12s}.sec:nth-child(4){animation-delay:.16s}.sec:nth-child(5){animation-delay:.20s}.sec:nth-child(6){animation-delay:.24s}.sec:nth-child(7){animation-delay:.28s}.sec:nth-child(8){animation-delay:.32s}
+.slbl{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--g);text-transform:uppercase;margin-bottom:8px;padding-right:2px}
+.card{background:var(--wh);border-radius:var(--r);border:1px solid var(--br);padding:16px;margin-bottom:10px}
+.avg-note{background:var(--gl);border-right:3px solid var(--g);border-radius:0 var(--rs) var(--rs) 0;padding:10px 14px;font-size:13px;color:var(--tm);line-height:1.6;margin-bottom:16px}
+.name-inp{width:100%;border:1.5px solid var(--br);border-radius:var(--rs);padding:14px 16px;font-size:16px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);outline:none;direction:rtl;transition:border-color .2s;margin-bottom:10px}
+.name-inp:focus{border-color:var(--g);background:var(--wh)}
+.date-row{display:flex;align-items:center;gap:10px}
+.date-lbl{font-size:13px;color:var(--tm);flex-shrink:0}
+.date-inp{border:1.5px solid var(--br);border-radius:var(--rs);padding:10px 12px;font-size:14px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);outline:none;flex:1;transition:border-color .2s}
+.date-inp:focus{border-color:var(--g)}
+.feel-row{display:flex;justify-content:space-between;gap:6px;margin-top:8px}
+.feel-btn{flex:1;aspect-ratio:1;border-radius:var(--rs);border:1.5px solid var(--br);background:var(--bg);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.feel-btn.sel{border-color:var(--g);background:var(--gl);transform:scale(1.08)}
+.feel-lbls{display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--ts)}
+.w-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.w-wrap{display:flex;flex-direction:column;gap:4px}
+.w-lbl{font-size:11px;color:var(--ts);text-align:center}
+.w-inp{border:1.5px solid var(--br);border-radius:var(--rs);padding:10px 6px;font-size:15px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);outline:none;text-align:center;width:100%;transition:border-color .2s}
+.w-inp:focus{border-color:var(--g)}
+.w-avg{text-align:center;font-size:13px;color:var(--ts);padding:8px 12px;background:var(--gp);border-radius:var(--rs);margin-top:4px}
+.w-avg b{font-size:16px;color:var(--g)}
+.meas-rows{display:flex;flex-direction:column;gap:10px}
+.meas-row{display:grid;grid-template-columns:1fr 100px;gap:8px;align-items:center}
+.meas-sel{border:1.5px solid var(--br);border-radius:var(--rs);padding:11px 12px;font-size:13px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);outline:none;width:100%;direction:rtl;transition:border-color .2s;-webkit-appearance:none;cursor:pointer}
+.meas-sel:focus{border-color:var(--g)}
+.meas-inp{border:1.5px solid var(--br);border-radius:var(--rs);padding:11px 10px;font-size:15px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);outline:none;width:100%;text-align:center;transition:border-color .2s}
+.meas-inp:focus{border-color:var(--g)}
+.hint{font-size:11px;color:var(--ts);font-style:italic;margin-bottom:10px}
+.hcard{background:var(--wh);border-radius:var(--r);border:1px solid var(--br);padding:16px;margin-bottom:10px;transition:border-color .2s}
+.hcard.rated{border-color:var(--gm)}
+.hhead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hemoji{font-size:22px;flex-shrink:0}
+.hinfo{flex:1}
+.hname{font-size:14px;font-weight:700;color:var(--tx)}
+.hsub2{font-size:11px;color:var(--ts)}
+.sdisp{font-size:13px;font-weight:700;color:var(--ts);min-width:28px;text-align:center;transition:color .2s}
+.sdisp.low{color:var(--rd)}.sdisp.mid{color:var(--am)}.sdisp.hi{color:var(--g)}
+.score-lbls{display:flex;justify-content:space-between;margin-bottom:6px;font-size:10px;color:var(--ts);padding:0 2px}
+.stars{display:flex;gap:4px}
+.star{flex:1;height:42px;border-radius:8px;border:1.5px solid var(--br);background:var(--bg);font-size:13px;font-weight:700;color:var(--ts);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:'Heebo',sans-serif}
+.star:active{transform:scale(.93)}
+.star.s1.sel{background:#FDECEA;border-color:#C0392B;color:#C0392B}
+.star.s2.sel{background:#FEF0DC;border-color:#D4820A;color:#D4820A}
+.star.s3.sel{background:#FFFDE0;border-color:#B8A600;color:#B8A600}
+.star.s4.sel{background:#E8F7EE;border-color:#27AE60;color:#27AE60}
+.star.s5.sel{background:#EBF5EE;border-color:var(--g);color:var(--g)}
+.fbp{display:none;margin-top:12px;padding:12px;border-radius:var(--rs);background:var(--rl);border:1px solid #F1948A;animation:sd .3s ease}
+.fbp.amber{background:var(--al);border-color:#F0A500}
+.fbp.on{display:block}
+@keyframes sd{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.fbt{font-size:11px;font-weight:700;color:var(--rd);margin-bottom:6px}
+.fbp.amber .fbt{color:var(--am)}
+.tools{list-style:none}
+.tool{font-size:12px;color:var(--tm);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;gap:6px;line-height:1.4}
+.tool:last-child{border-bottom:none}
+.tool::before{content:'←';color:var(--rd);flex-shrink:0;font-weight:700;font-size:11px;margin-top:1px}
+.fbp.amber .tool::before{color:var(--am)}
+.gsec{display:none;animation:fu .4s ease forwards}
+.gsec.on{display:block}
+.gintro{font-size:13px;color:var(--tm);margin-bottom:12px;line-height:1.6;padding:12px 14px;background:var(--gl);border-radius:var(--rs);border-right:3px solid var(--g)}
+.gitem{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--rs);border:1.5px solid var(--br);background:var(--wh);margin-bottom:8px;cursor:pointer;transition:all .15s}
+.gitem:active{transform:scale(.98)}
+.gitem.sel{border-color:var(--g);background:var(--gl)}
+.gcheck{width:22px;height:22px;border-radius:50%;border:2px solid var(--br);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:transparent;transition:all .15s}
+.gitem.sel .gcheck{background:var(--g);border-color:var(--g);color:#fff}
+.gemoji{font-size:20px}
+.gtext{font-size:13px;color:var(--tx);flex:1;line-height:1.4}
+.mrow{display:flex;justify-content:space-between;gap:5px;margin-top:8px}
+.mbtn{flex:1;padding:12px 2px;border-radius:var(--rs);border:1.5px solid var(--br);background:var(--bg);font-size:14px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s;font-family:'Heebo',sans-serif;color:var(--ts)}
+.mslbl{font-size:9px;font-weight:400;color:inherit;opacity:.8}
+.mbtn:active{transform:scale(.95)}
+.mbtn.m1{background:#FDECEA;border-color:#C0392B;color:#C0392B}
+.mbtn.m2{background:#FEF0DC;border-color:#D4820A;color:#D4820A}
+.mbtn.m3{background:#FFFDE0;border-color:#B8A600;color:#B8A600}
+.mbtn.m4{background:#E8F7EE;border-color:#27AE60;color:#27AE60}
+.mbtn.m5{background:#EBF5EE;border-color:var(--g);color:var(--g)}
+.field-hint{font-size:11px;color:var(--ts);margin-bottom:8px;font-style:italic}
+textarea.field{width:100%;border:1.5px solid var(--br);border-radius:var(--rs);padding:12px 14px;font-size:14px;font-family:'Heebo',sans-serif;color:var(--tx);background:var(--bg);resize:none;outline:none;direction:rtl;transition:border-color .2s;line-height:1.6}
+textarea.field:focus{border-color:var(--g);background:var(--wh)}
+.sub-btn{width:100%;padding:18px;border-radius:var(--r);background:var(--g);color:#fff;font-size:17px;font-weight:700;font-family:'Heebo',sans-serif;border:none;cursor:pointer;transition:all .15s;margin-top:20px;letter-spacing:.02em}
+.sub-btn:active{transform:scale(.98);opacity:.9}
+.sub-btn:disabled{opacity:.4;cursor:not-allowed}
+.success{display:none;text-align:center;padding:50px 20px;animation:fu .5s ease forwards}
+.success.on{display:block}
+.sicon{font-size:60px;margin-bottom:16px;animation:bounce .6s ease}
+@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.stitle{font-size:26px;font-weight:900;color:var(--g);margin-bottom:8px}
+.ssub{font-size:14px;color:var(--tm);line-height:1.7;margin-bottom:24px}
+.gsum{background:var(--gl);border-radius:var(--r);padding:16px;margin-bottom:20px;text-align:right}
+.gsum-title{font-size:11px;font-weight:700;color:var(--g);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.gsum-item{font-size:13px;color:var(--tx);padding:5px 0;border-bottom:1px solid rgba(46,139,87,.15);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
+.gsum-item:last-child{border-bottom:none}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:var(--r);font-size:15px;font-weight:700;font-family:'Heebo',sans-serif;text-decoration:none;border:none;cursor:pointer;width:100%;justify-content:center;transition:opacity .15s}
+.wa-btn:active{opacity:.85}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="hlbl">דור עמר · מאמן אישי</div>
+  <div class="htitle">צ'ק-אין שבועי 💪</div>
+  <div class="hsub">לוקח 2 דקות. משנה הכל.</div>
+</div>
+
+<div class="pw">
+  <div class="pb"><div class="pf" id="pf"></div></div>
+  <div class="pt" id="pt">מלא את הצ'ק-אין השבועי</div>
+</div>
+
+<div class="cnt">
+<div id="fw">
+
+<!-- הוראה כללית -->
+<div class="sec">
+  <div class="avg-note">
+    💡 <strong>איך מדרגים?</strong> לפי הממוצע השבועי שלך – לא לפי הימים הטובים ולא לפי הגרועים. מה היה <strong>הרוב</strong>?
+  </div>
+</div>
+
+<!-- פרטים -->
+<div class="sec">
+  <div class="slbl">פרטים</div>
+  <div class="card">
+    <input class="name-inp" id="nm" type="text" placeholder="השם שלי..." oninput="upd()" autocomplete="name">
+    <div class="date-row">
+      <span class="date-lbl">תאריך:</span>
+      <input class="date-inp" id="dt" type="date">
+    </div>
+  </div>
+</div>
+
+<!-- תחושה -->
+<div class="sec">
+  <div class="slbl">תחושה כללית השבוע</div>
+  <div class="card">
+    <div class="feel-row" id="feel-row">
+      <button class="feel-btn" onclick="setFeel(1)">😞</button>
+      <button class="feel-btn" onclick="setFeel(2)">😔</button>
+      <button class="feel-btn" onclick="setFeel(3)">😐</button>
+      <button class="feel-btn" onclick="setFeel(4)">🙂</button>
+      <button class="feel-btn" onclick="setFeel(5)">🔥</button>
+    </div>
+    <div class="feel-lbls"><span>קשה מאוד</span><span>מעולה</span></div>
+  </div>
+</div>
+
+<!-- שקילות -->
+<div class="sec">
+  <div class="slbl">⚖️ שקילות השבוע</div>
+  <div class="card">
+    <div class="hint">בוקר, אחרי שירותים, לפני אכילה – מלא מה שיש</div>
+    <div class="w-grid">
+      <div class="w-wrap"><span class="w-lbl">שקילה 1</span><input class="w-inp" id="w1" type="number" step="0.1" placeholder="ק״ג" oninput="calcAvg()"></div>
+      <div class="w-wrap"><span class="w-lbl">שקילה 2</span><input class="w-inp" id="w2" type="number" step="0.1" placeholder="ק״ג" oninput="calcAvg()"></div>
+      <div class="w-wrap"><span class="w-lbl">שקילה 3</span><input class="w-inp" id="w3" type="number" step="0.1" placeholder="ק״ג" oninput="calcAvg()"></div>
+    </div>
+    <div class="w-avg" id="wavg">ממוצע שבועי: <b>—</b></div>
+  </div>
+</div>
+
+<!-- מדידות -->
+<div class="sec">
+  <div class="slbl">📏 מדידות (סוף חודש בלבד)</div>
+  <div class="card">
+    <div class="hint">מלא רק בסוף החודש – בחר אזור והזן מספר בס״מ</div>
+    <div class="meas-rows">
+      <div class="meas-row">
+        <select class="meas-sel" id="ms1"><option value="">בחר אזור מדידה...</option><option>בטן (קו טבור)</option><option>ישבן</option><option>חזה</option><option>גב</option><option>ירכיים</option><option>ידיים (ממוצע)</option></select>
+        <input class="meas-inp" id="mv1" type="number" step="0.5" placeholder="ס״מ">
+      </div>
+      <div class="meas-row">
+        <select class="meas-sel" id="ms2"><option value="">בחר אזור מדידה...</option><option>בטן (קו טבור)</option><option>ישבן</option><option>חזה</option><option>גב</option><option>ירכיים</option><option>ידיים (ממוצע)</option></select>
+        <input class="meas-inp" id="mv2" type="number" step="0.5" placeholder="ס״מ">
+      </div>
+      <div class="meas-row">
+        <select class="meas-sel" id="ms3"><option value="">בחר אזור מדידה...</option><option>בטן (קו טבור)</option><option>ישבן</option><option>חזה</option><option>גב</option><option>ירכיים</option><option>ידיים (ממוצע)</option></select>
+        <input class="meas-inp" id="mv3" type="number" step="0.5" placeholder="ס״מ">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- הרגלים -->
+<div class="sec">
+  <div class="slbl">דירוג הרגלים</div>
+  <div id="hw"></div>
+</div>
+
+<!-- יעד -->
+<div class="sec gsec" id="gsec">
+  <div class="slbl">🎯 יעד שבועי</div>
+  <div class="gintro" id="gi"></div>
+  <div id="gl"></div>
+</div>
+
+<!-- מוטיבציה -->
+<div class="sec">
+  <div class="slbl">🔥 מוטיבציה לשבוע הקרוב</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--tm);margin-bottom:8px">כמה אתה נכנס לשבוע הבא עם כוח?</div>
+    <div class="mrow" id="mr">
+      <button class="mbtn" onclick="setM(1)">1<span class="mslbl">נמוכה</span></button>
+      <button class="mbtn" onclick="setM(2)">2<span class="mslbl">חלשה</span></button>
+      <button class="mbtn" onclick="setM(3)">3<span class="mslbl">בסדר</span></button>
+      <button class="mbtn" onclick="setM(4)">4<span class="mslbl">טובה</span></button>
+      <button class="mbtn" onclick="setM(5)">5<span class="mslbl">גבוהה</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ניצחון -->
+<div class="sec">
+  <div class="slbl">🏆 ניצחון השבוע</div>
+  <div class="card">
+    <div class="field-hint">"שתיתי מים כל בוקר" / "לא נגעתי בחטיפים 3 ימים" – הכל נחשב</div>
+    <textarea class="field" id="win" rows="3" placeholder="הדבר אחד שאני הכי גאה/ה בו..." oninput="upd()"></textarea>
+  </div>
+</div>
+
+<!-- הערה -->
+<div class="sec">
+  <div class="slbl">💬 משהו לדור</div>
+  <div class="card">
+    <textarea class="field" id="open" rows="3" placeholder="שאלה, קושי, משהו שהרגשת – אופציונלי..."></textarea>
+  </div>
+</div>
+
+<button class="sub-btn" id="sb" onclick="submit()" disabled>שלח צ'ק-אין לדור ←</button>
+
+</div><!-- /fw -->
+
+<div class="success" id="succ">
+  <div class="sicon">🎯</div>
+  <div class="stitle" id="st">כל הכבוד!</div>
+  <div class="ssub" id="ss"></div>
+  <div class="gsum" id="sg"></div>
+  <a class="wa-btn" id="wal" href="#" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    שלח לדור בוואטספ
+  </a>
+</div>
+</div>
+
+<script>
+const HABITS=[
+  {id:'water',emoji:'💧',name:'שתיית מים',sub:'2–3 ליטר ביום',
+   lbls:['כמעט לא שתיתי','פחות מליטר','~ליטר וחצי','~2 ליטר','2–3 ליטר+'],
+   low:['שים בקבוק מים מולך כל הזמן','תזכורת בטלפון כל שעתיים','כוס מים לפני כל ארוחה','נסה להוסיף מיץ פטל או סודה לשיפור הטעם','הוסף כוס תה גדולה ביום למכסה הנוזלים'],th:'red'},
+  {id:'sleep',emoji:'😴',name:'שינה',sub:'6–7 שעות ומעלה',
+   lbls:['פחות מ-5 שעות','5–5.5 שעות','6 שעות','6.5–7 שעות','7+ שעות'],
+   low:['כנס למיטה 30 דקות קודם','טלפון בצד שעה לפני שינה','עצור קפאין לפחות 6–8 שעות לפני השינה','היגיינת שינה – חדר קר, חשוך מאוד, שמיכה וכרית נוחות','שעת כיבוי מסכים קבועה'],th:'amber'},
+  {id:'protein',emoji:'🥩',name:'חלבון',sub:'20–40 גרם בכל ארוחה',
+   lbls:['חלבון בארוחה אחת','ב-2 ארוחות','רוב הארוחות','כמעט בכולן','בכל ארוחה ✓'],
+   low:['ביצה/קוטג\' לבוקר – מינימום','גביע יוגורט כחטיף ברירת מחדל','עוף, דג או בשר בארוחה עיקרית כל יום','הוסף לרשימת הקניות 2–3 מקורות חלבון שקל לשלב ביום יום','בכל צלחת שאל: יש פה חלבון?'],th:'red'},
+  {id:'vegs',emoji:'🥦',name:'ירקות',sub:'3–5 ירקות ביום',
+   lbls:['כמעט לא','ירק אחד ביום','2 ירקות','3–4 ירקות','5 ירקות ומעלה'],
+   low:['ארוחת סלט אחת ביום – הרגל קבוע','הוסף לרשימת הקניות ירקות שאתה אוהב לשלב','הכנה מראש של ירקות בתנור לשבוע שלם','עגבניה/מלפפון עם כל ארוחה – פשוט ומהיר'],th:'amber'},
+  {id:'harmful',emoji:'🚫',name:'פחות מזיקים',sub:'אוכל מעובד, חטיפים, אלכוהול',
+   lbls:['כל יום מזיקים','רוב הימים','כמה פעמים','פעם-פעמיים','שבוע נקי כמעט'],
+   low:['החלף כוס אחת של שתייה מתוקה במים','אל תקנה חטיפים הביתה השבוע','זהה מתי זה קורה – שעמום/לחץ/הרגל?','התייעץ עם דור ספציפית על הגורם הבעייתי אצלך'],th:'red'},
+  {id:'training',emoji:'🏋️',name:'עומס באימון',sub:'האם עלינו במשקל או בחזרות בתרגילים החשובים?',
+   lbls:['הורדנו עומס','דומה לשבוע שעבר','קצת יותר מהשבוע שעבר','עלינו בצורה ברורה','היו שיאים חדשים 🎯'],
+   low:['בחר תרגיל אחד ספציפי לדחוף בו השבוע','נוח קצת יותר בין תרגילים – היכנס כשאתה מרגיש מוכן','זכור: העומס הנוסף מתורגם לשינוי בפועל בגוף שלך','הוסף חזרה אחת לסט – זה מספיק להתקדמות'],th:'red'},
+  {id:'energy',emoji:'⚡',name:'אנרגיה ביומיום',sub:'ברמה כללית לאורך היום',
+   lbls:['עייף כל הזמן','אנרגיה נמוכה','בסדר','רוב הזמן טוב','אנרגטי ועירני'],
+   low:['שינה ומים – בדוק קודם','אכול ארוחת בוקר – אנרגיה מתחילה שם','הפחת אוכל אולטרה מעובד שמכביד על האנרגיה','הפחת קפאין אחרי 14:00','יציאה לאוויר קצרה ביום עושה הבדל'],th:'amber'},
+  {id:'recovery',emoji:'🔄',name:'התאוששות',sub:'האם הגוף הרגיש מוכן בין אימונים?',
+   lbls:['כאב מפריע לתפקוד','נוקשות ניכרת','בסדר, לא מושלם','התאוששתי טוב','רענן ומוכן לחלוטין'],
+   low:['שינה היא ההתאוששות הכי חשובה','חלבון אחרי אימון – חשוב לשיקום שריר','שתף את דור בתחושה שלך – זה מידע חשוב','האם זה משהו שחוזר כל שבוע או חד פעמי?','יום מנוחה אקטיבי – הליכה קלה'],th:'amber'},
+  {id:'steps',emoji:'🚶',name:'צעדים יומיים',sub:'ממוצע יומי – שאיפה מעל 7,000',
+   lbls:['מתחת ל-3,000','3,000–5,000','5,000–7,000','7,000–9,000','מעל 9,000 🎯'],
+   low:['רכז הליכות מרוכזות במהלך השבוע להעלאת הממוצע','מדרגות במקום מעלית – תמיד','הליכה 10 דקות אחרי ארוחה','לקום מהכיסא כל שעה – מוסיף צעדים'],th:'amber'},
+  {id:'nutrition',emoji:'🍽️',name:'עמידה ביעד תזונתי',sub:'תפריט / קלוריות / ערכים – לפי מה שסיכמנו',
+   lbls:['התפזרתי, לא שמרתי כמעט','ניסיתי, רוב הימים לא עמדתי','חצי חצי – חצי מהימים כן, חצי לא','עמדתי ברוב הימים, 1–2 ימים חלשים','עמדתי כמעט כל השבוע, מעל 80% 🎯'],
+   low:['התייעץ עם דור על מה שהיה קשה הכי הרבה השבוע','זהה את הארוחה או הזמן שבו אתה מתפזר – שם הבעיה','הכנה מראש של ארוחה אחת ביום מקטינה חריגות משמעותית','התפזרת? לא נורא – ארוחה הבאה מתחילים מחדש'],th:'amber'},
+];
+
+let scores={},feel=0,motiv=0,selGoals=[];
+
+// Build habits
+const hw=document.getElementById('hw');
+HABITS.forEach(h=>{
+  const d=document.createElement('div');
+  d.className='hcard';d.id=`hc-${h.id}`;
+  d.innerHTML=`
+    <div class="hhead">
+      <span class="hemoji">${h.emoji}</span>
+      <div class="hinfo"><div class="hname">${h.name}</div><div class="hsub2">${h.sub}</div></div>
+      <span class="sdisp" id="sd-${h.id}">—</span>
+    </div>
+    <div class="score-lbls"><span>${h.lbls[0]}</span><span>${h.lbls[2]}</span><span>${h.lbls[4]}</span></div>
+    <div class="stars">${[1,2,3,4,5].map(n=>`<button class="star s${n}" id="st-${h.id}-${n}" onclick="rate('${h.id}',${n})">${n}</button>`).join('')}</div>
+    <div class="fbp ${h.th==='amber'?'amber':''}" id="fb-${h.id}">
+      <div class="fbt">${h.th==='red'?'⚠️ כלים לשיפור:':'💡 טיפים:'}</div>
+      <ul class="tools">${h.low.map(t=>`<li class="tool">${t}</li>`).join('')}</ul>
+    </div>`;
+  hw.appendChild(d);
+});
+
+function rate(id,n){
+  scores[id]=n;
+  for(let i=1;i<=5;i++){const s=document.getElementById(`st-${id}-${i}`);s.className=`star s${i}`+(i<=n?' sel':'');}
+  const sd=document.getElementById(`sd-${id}`);
+  sd.textContent=`${n}/5`;sd.className='sdisp '+(n<=2?'low':n<=3?'mid':'hi');
+  const h=HABITS.find(h=>h.id===id);
+  document.getElementById(`fb-${id}`).className=`fbp ${h.th==='amber'?'amber':''} ${n<=2?'on':''}`;
+  document.getElementById(`hc-${id}`).className='hcard rated';
+  upd();
+  if(Object.keys(scores).length===HABITS.length) buildGoals();
+}
+
+function setFeel(n){feel=n;document.querySelectorAll('.feel-btn').forEach((b,i)=>b.classList.toggle('sel',i===n-1));upd();}
+
+function setM(n){
+  motiv=n;
+  document.querySelectorAll('.mbtn').forEach((b,i)=>{b.className='mbtn'+(i===n-1?` m${n}`:'');});
+  upd();
+}
+
+function calcAvg(){
+  const vs=[document.getElementById('w1'),document.getElementById('w2'),document.getElementById('w3')]
+    .map(el=>parseFloat(el.value)).filter(v=>!isNaN(v)&&v>0);
+  const el=document.getElementById('wavg');
+  if(!vs.length){el.innerHTML='ממוצע שבועי: <b>—</b>';return;}
+  el.innerHTML=`ממוצע שבועי: <b>${(vs.reduce((a,b)=>a+b,0)/vs.length).toFixed(1)} ק"ג</b>`;
+  upd();
+}
+
+function buildGoals(){
+  const low=HABITS.filter(h=>scores[h.id]<=3).sort((a,b)=>scores[a.id]-scores[b.id]);
+  const gs=document.getElementById('gsec');
+  const gl=document.getElementById('gl');
+  const gi=document.getElementById('gi');
+  selGoals=[];
+  gi.textContent=low.length===0?'שבוע מדהים! בחר הרגל אחד להמשיך לחזק:'
+    :`${low.length} הרגלים יכולים להשתפר. בחר 1–2 שאתה מתחייב אליהם:`;
+  const show=low.length===0?HABITS.slice(0,3):low.slice(0,5);
+  gl.innerHTML=show.map(h=>`
+    <div class="gitem" id="gi-${h.id}" onclick="togGoal('${h.id}')">
+      <span class="gemoji">${h.emoji}</span>
+      <div class="gtext"><strong>${h.name}</strong><br><span style="font-size:12px;color:var(--ts)">${h.low[0]}</span></div>
+      <span class="gcheck" id="gc-${h.id}">✓</span>
+    </div>`).join('');
+  gs.classList.add('on');
+  setTimeout(()=>gs.scrollIntoView({behavior:'smooth',block:'start'}),200);
+}
+
+function togGoal(id){
+  const idx=selGoals.indexOf(id);
+  if(idx>-1){selGoals.splice(idx,1);document.getElementById(`gi-${id}`).classList.remove('sel');}
+  else{if(selGoals.length>=2){alert('בחר עד 2 יעדים');return;}selGoals.push(id);document.getElementById(`gi-${id}`).classList.add('sel');}
+  upd();
+}
+
+// Set today
+document.getElementById('dt').value=new Date().toISOString().split('T')[0];
+
+function upd(){
+  const nm=document.getElementById('nm').value.trim();
+  const win=document.getElementById('win').value.trim();
+  const rated=Object.keys(scores).length;
+  const done=(nm?1:0)+(feel?1:0)+(win?1:0)+rated;
+  const pct=Math.round(done/(3+HABITS.length)*100);
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('pt').textContent=pct>=100?'מוכן לשליחה ✓':`${pct}% הושלם`;
+  document.getElementById('sb').disabled=!(nm&&feel&&win&&rated===HABITS.length&&motiv);
+}
+
+function submit(){
+  const nm=document.getElementById('nm').value.trim();
+  const dt=document.getElementById('dt').value;
+  const win=document.getElementById('win').value.trim();
+  const open=document.getElementById('open').value.trim();
+  const w1=document.getElementById('w1').value;
+  const w2=document.getElementById('w2').value;
+  const w3=document.getElementById('w3').value;
+  const wv=[w1,w2,w3].map(parseFloat).filter(v=>!isNaN(v)&&v>0);
+  const wAvg=wv.length?(wv.reduce((a,b)=>a+b,0)/wv.length).toFixed(1):'—';
+  const ms=[[document.getElementById('ms1').value,document.getElementById('mv1').value],
+            [document.getElementById('ms2').value,document.getElementById('mv2').value],
+            [document.getElementById('ms3').value,document.getElementById('mv3').value]].filter(([s,v])=>s&&v);
+  const feelE=['','😞','😔','😐','🙂','🔥'];
+  const bar=n=>'●'.repeat(n)+'○'.repeat(5-n);
+  const mLbl=['','נמוכה','חלשה','בסדר','טובה','גבוהה 🔥'];
+
+  let msg=`*צ'ק-אין שבועי | ${nm}*\n`;
+  if(dt){const[y,m,d]=dt.split('-');msg+=`📅 ${d}/${m}/${y}\n`;}
+  msg+=`תחושה כללית: ${feelE[feel]} ${feel}/5\n\n`;
+  msg+=`*⚖️ שקילות:*\n`;
+  if(w1)msg+=`שקילה 1: ${w1} ק"ג\n`;
+  if(w2)msg+=`שקילה 2: ${w2} ק"ג\n`;
+  if(w3)msg+=`שקילה 3: ${w3} ק"ג\n`;
+  msg+=`ממוצע: *${wAvg} ק"ג*\n`;
+  if(ms.length){msg+=`\n*📏 מדידות:*\n`;ms.forEach(([s,v])=>msg+=`${s}: ${v} ס"מ\n`);}
+  msg+=`\n*הרגלים השבוע:*\n`;
+  HABITS.forEach(h=>{
+    const s=scores[h.id]||0;
+    msg+=`${h.emoji} ${h.name}: ${bar(s)} ${s}/5\n   ↳ ${h.lbls[s-1]||''}\n`;
+  });
+  msg+=`\n🔥 מוטיבציה לשבוע הבא: ${motiv}/5 – ${mLbl[motiv]}\n`;
+  msg+=`\n*🏆 ניצחון השבוע:*\n${win}\n`;
+  const gn=selGoals.map(id=>{const h=HABITS.find(h=>h.id===id);return`${h.emoji} ${h.name}: ${h.low[0]}`;});
+  if(gn.length)msg+=`\n*🎯 יעד שבועי:*\n${gn.join('\n')}\n`;
+  if(open)msg+=`\n*💬 הערה לדור:*\n${open}`;
+
+  document.getElementById('fw').style.display='none';
+  const succ=document.getElementById('succ');succ.classList.add('on');
+  document.getElementById('st').textContent=`כל הכבוד, ${nm}! 🎯`;
+  const lowN=HABITS.filter(h=>scores[h.id]<=2).length;
+  document.getElementById('ss').textContent=lowN>0
+    ?`זיהית ${lowN} אזורים לשיפור – זה אומר שאתה ישר/ה עם עצמך. מכאן מתחיל שינוי אמיתי.`
+    :'שבוע חזק! המשך ככה ואת/ה בדרך הנכונה.';
+  const sg=document.getElementById('sg');
+  sg.innerHTML=gn.length
+    ?`<div class="gsum-title">היעדים שלי השבוע</div>${gn.map(g=>`<div class="gsum-item">🎯 ${g}</div>`).join('')}`
+    :'<div class="gsum-title">ממשיכים כמות שהיינו 💪</div>';
+
+  // ← החלף במספר שלך: 972XXXXXXXXX
+  const phone='972XXXXXXXXX';
+  document.getElementById('wal').href=`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
